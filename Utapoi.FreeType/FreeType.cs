@@ -1,7 +1,8 @@
 ﻿// Copyright (c) Utapoi Ltd <contact@utapoi.com>
 
+using Utapoi.FreeType.Enums;
 using Utapoi.FreeType.Exceptions;
-using Utapoi.FreeType.Models;
+using Utapoi.FreeType.Fonts;
 
 namespace Utapoi.FreeType;
 
@@ -24,9 +25,9 @@ public sealed class FreeType : IDisposable
         ReleaseUnmanagedResources();
     }
 
-    public FontFace LoadFont(string path)
+    public Face LoadFace(string path)
     {
-        return new FontFace(Library, path, 0);
+        return new Face(Library, path, 0);
     }
 
     public void Dispose()

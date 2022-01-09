@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using Utapoi.FreeType.Models;
+using Utapoi.FreeType.Enums;
 
 namespace Utapoi.FreeType.Tests
 {
@@ -45,6 +45,13 @@ namespace Utapoi.FreeType.Tests
             result = FreeTypeInvoke.FT_Done_FreeType(ptr);
 
             Assert.AreEqual(Error.Ok, result);
+        }
+
+        [Test]
+        [TestCase("")]
+        public void LoadGlyph_FreeType(string path)
+        {
+
         }
     }
 }

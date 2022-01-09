@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Utapoi Ltd <contact@utapoi.com>
 
-namespace Utapoi.FreeType.Models;
+namespace Utapoi.FreeType.Enums;
 
 /// <summary>
 /// FreeType error codes.
