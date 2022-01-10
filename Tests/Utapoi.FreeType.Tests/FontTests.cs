@@ -8,7 +8,7 @@ using Utapoi.FreeType.Enums;
 namespace Utapoi.FreeType.Tests;
 
 [TestFixture]
-public class FreeTypeTests
+public class FontTests
 {
     [Test]
     [TestCase("Roboto-Regular.ttf")]
@@ -22,7 +22,7 @@ public class FreeTypeTests
 
     [Test]
     [TestCase("Roboto-Regular.ttf", "Roboto")]
-    [TestCase("OpenSans-Bold.ttf", "OpenSans")]
+    [TestCase("OpenSans-Bold.ttf", "Open Sans")]
     public void Font_GetFamilyName(string path, string family)
     {
         using var ft = new FreeType();

@@ -22,9 +22,14 @@ public class GlyphSlot
 
     #region Properties
 
-    //public GlyphSlot Next => new(InternalGlyphSlot.Next, Font);
-
     public GlyphFormat Format => InternalGlyphSlot.Format;
+
+    public Bitmap Bitmap => new(InternalGlyphSlot.Bitmap, InternalGlyphSlot.BitmapLeft, InternalGlyphSlot.BitmapTop);
+
+    public int Left => InternalGlyphSlot.BitmapLeft;
+
+    public int Top => InternalGlyphSlot.BitmapTop;
+
 
     #endregion
 }

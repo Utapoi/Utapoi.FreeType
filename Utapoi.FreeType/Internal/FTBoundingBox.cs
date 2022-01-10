@@ -7,11 +7,11 @@ namespace Utapoi.FreeType.Internal;
 [StructLayout(LayoutKind.Sequential)]
 internal struct FTBoundingBox
 {
-    public long MinX { get; set; }
+    public CLong MinX { get; set; }
 
-    public long MinY { get; set; }
+    public CLong MinY { get; set; }
 
-    public long MaxX { get; set; }
+    public CLong MaxX { get; set; }
 
-    public long MaxY { get; set; }
+    public CLong MaxY { get; set; }
 }

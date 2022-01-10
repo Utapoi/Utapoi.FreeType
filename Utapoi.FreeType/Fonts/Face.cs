@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Utapoi Ltd <contact@utapoi.com>
 
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using Utapoi.FreeType.Enums;
 using Utapoi.FreeType.Exceptions;
 using Utapoi.FreeType.Internal;
@@ -29,6 +30,9 @@ public sealed class Face : IDisposable
         Library = library;
         Handle = handle;
         InternalFontFace = Marshal.PtrToStructure<FTFace>(Handle);
+
+        // Avoid InvalidSizeHandle error.
+        SetSize(1);
     }
 
     public Face(IntPtr library, string path) : this(library, path, 0)
@@ -49,7 +53,7 @@ public sealed class Face : IDisposable
             if (IsDisposed)
                 throw new ObjectDisposedException(nameof(FaceCount), "Cannot access a disposed object.");
 
-            return InternalFontFace.Count;
+            return InternalFontFace.Count.Value;
         }
     }
 
@@ -60,7 +64,7 @@ public sealed class Face : IDisposable
             if (IsDisposed)
                 throw new ObjectDisposedException(nameof(FaceIndex), "Cannot access a disposed object.");
 
-            return InternalFontFace.Index;
+            return InternalFontFace.Index.Value;
         }
     }
 
@@ -94,7 +98,7 @@ public sealed class Face : IDisposable
             if (IsDisposed)
                 throw new ObjectDisposedException(nameof(GlyphCount), "Cannot access a disposed object.");
 
-            return InternalFontFace.GlyphCount;
+            return InternalFontFace.GlyphCount.Value;
         }
     }
 
@@ -133,20 +137,49 @@ public sealed class Face : IDisposable
 
     #endregion
 
-    public uint GetCharIndex(char code)
+    public uint GetCharIndex(uint code)
     {
         return FreeTypeInvoke.FT_Get_Char_Index(Handle, code);
     }
 
-    public void LoadGlyph(char code)
+    public Glyph LoadGlyph(uint code, LoadFlags flags = LoadFlags.Default)
     {
-        var result = FreeTypeInvoke.FT_Load_Glyph(Handle, GetCharIndex(code), (int)LoadFlags.Default);
+        var result = FreeTypeInvoke.FT_Load_Glyph(Handle, code, (int)flags);
 
         if (result != Error.Ok)
             throw new FreeTypeException($"Failed to load glyph {code}. Error: {result}");
 
-        Glyphs.Add(new Glyph(InternalFontFace.Glyph, this));
+        Glyphs.Add(new Glyph(InternalFontFace.Glyph, this, code));
+
+        return Glyphs.Last();
     }
+
+    public Glyph LoadCharacter(char code, LoadFlags flags = LoadFlags.Default)
+    {
+        if (Glyphs.Any(x => x.GlyphCode == code))
+            return Glyphs.First(x => x.GlyphCode == code);
+
+        var result = FreeTypeInvoke.FT_Load_Char(Handle, code, (int)flags);
+
+        if (result != Error.Ok)
+            throw new FreeTypeException($"Failed to load glyph {code}. Error: {result}");
+
+        Glyphs.Add(new Glyph(InternalFontFace.Glyph, this, code));
+
+        return Glyphs.Last();
+    }
+
+    public IEnumerable<Glyph> LoadCharacters(IEnumerable<char> characters, LoadFlags flags = LoadFlags.Default)
+        => characters
+            .Select(character => LoadCharacter(character, flags))
+            .DistinctBy(x => x.GlyphCode)
+            .ToList();
+
+    public IEnumerable<Glyph> LoadCharacters(string text, LoadFlags flags = LoadFlags.Default)
+        => text
+            .Select(character => LoadCharacter(character, flags))
+            .DistinctBy(x => x.GlyphCode)
+            .ToList();
 
     #region Size Management
 
