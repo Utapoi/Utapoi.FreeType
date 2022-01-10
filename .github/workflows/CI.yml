@@ -8,17 +8,10 @@ jobs:
     strategy:
        fail-fast: false
        matrix:
-          os: [ubuntu, windows, macos]
-          include:
-            - name: ubuntu
-              fullname: ubuntu-latest
-              prettyname: Linux
-            - name: windows
-              fullname: windows-latest
-              prettyname: Windows
-            - name: macos
-              fullname: macos-latest
-              prettyname: MacOS
+          os:
+            - { prettyname: Windows, fullname: windows-latest }
+            - { prettyname: macOS, fullname: macos-latest }
+            - { prettyname: Linux, fullname: ubuntu-latest }
         
     timeout-minutes: 60
     steps:
