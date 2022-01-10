@@ -3,8 +3,6 @@
 using System;
 using System.Linq.Expressions;
 using NUnit.Framework;
-using FreeTypeSharp;
-using FreeTypeSharp.Native;
 using Utapoi.FreeType.Enums;
 
 namespace Utapoi.FreeType.Tests;
