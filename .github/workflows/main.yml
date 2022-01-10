@@ -93,4 +93,4 @@ jobs:
         run: dotnet jb inspectcode $(pwd)/Utapoi.FreeType.sln --output=$(pwd)/inspectcodereport.xml --cachesDir=$(pwd)/inspectcode --verbosity=WARN
 
       - name: NVika
-        run: dotnet nvika parsereport "${{github.workspace}}/inspectcodereport.xml" --treatwarningsaserrors
+        run: dotnet nvika parsereport "${{github.workspace}}/inspectcodereport.xml"
