@@ -20,9 +20,9 @@ internal struct FTGlyphSlot
 
     public FTGlyphMetrics Metrics { get; set; }
 
-    public long LinearHorizontalAdvance { get; set; }
+    public CLong LinearHorizontalAdvance { get; set; }
 
-    public long LinearVerticalAdvance { get; set; }
+    public CLong LinearVerticalAdvance { get; set; }
 
     public FTVector2 Advance { get; set; }
 
@@ -32,7 +32,7 @@ internal struct FTGlyphSlot
 
     public int BitmapLeft { get; set; }
 
-    public int BitmapRight { get; set; }
+    public int BitmapTop { get; set; }
 
     public FTOutline Outline { get; set; }
 
@@ -42,11 +42,11 @@ internal struct FTGlyphSlot
 
     public IntPtr ControlData { get; set; }
 
-    public long ControlLength { get; set; }
+    public CLong ControlLength { get; set; }
 
-    public long LsbDelta { get; set; }
+    public CLong LsbDelta { get; set; }
 
-    public long RsbDelta { get; set; }
+    public CLong RsbDelta { get; set; }
 
     public IntPtr Other { get; set; }
 

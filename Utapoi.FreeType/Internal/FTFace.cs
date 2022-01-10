@@ -1,22 +1,21 @@
 ﻿// Copyright (c) Utapoi Ltd <contact@utapoi.com>
 
 using System.Runtime.InteropServices;
-using FTLong = System.IntPtr;
 
 namespace Utapoi.FreeType.Internal;
 
 [StructLayout(LayoutKind.Sequential)]
 internal struct FTFace
 {
-    public long Count { get; set; }
+    public CLong Count { get; set; }
 
-    public long Index { get; set; }
+    public CLong Index { get; set; }
 
-    public long FaceFlags { get; set; }
+    public CLong FaceFlags { get; set; }
 
-    public long StyleFlags { get; set; }
+    public CLong StyleFlags { get; set; }
 
-    public long GlyphCount { get; set; }
+    public CLong GlyphCount { get; set; }
 
     public IntPtr FamilyName { get; set; }
 
