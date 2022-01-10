@@ -28,7 +28,7 @@ jobs:
         if: ${{matrix.os.fullname == 'ubuntu-latest'}}
         run: |
          sudo apt-get update && \
-         sudo apt-get -y install libfreetype6-dev
+         sudo apt-get -y install freetype
       - name: Compile
         run: dotnet build -c Debug -warnaserror
 
