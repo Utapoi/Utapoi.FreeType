@@ -22,6 +22,7 @@ public class FreeTypeTests
 
     [Test]
     [TestCase("Roboto-Regular.ttf", "Roboto")]
+    [TestCase("OpenSans-Bold.ttf", "OpenSans")]
     public void Font_GetFamilyName(string path, string family)
     {
         using var ft = new FreeType();
@@ -32,22 +33,14 @@ public class FreeTypeTests
     }
 
     [Test]
-    [TestCase("OpenSans-Bold.ttf", "")]
+    [TestCase("Roboto-Regular.ttf", "Regular")]
+    [TestCase("OpenSans-Bold.ttf", "Bold")]
     public void Font_GetStyleName(string path, string style)
     {
         using var ft = new FreeType();
         var font = ft.LoadFace(path);
 
-        //font.SetSize(5)
-        //    .LoadGlyph('F');
-        ////var lib = new FreeTypeLibrary();
-        ////FT.FT_New_Face(lib.Native, path, 0, out var f);
-        ////var font = new FreeTypeFaceFacade(lib, f);
-
-        //Assert.NotNull(font);
-
-        ////Assert.AreEqual(style, font.StyleName);
-
-        ////Assert.IsNotNull(font);
+        Assert.IsNotNull(font);
+        Assert.AreEqual(style, font.StyleName);
     }
 }
