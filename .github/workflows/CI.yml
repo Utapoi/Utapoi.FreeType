@@ -23,17 +23,11 @@ jobs:
         with:
           dotnet-version: "6.0.x"
 
-      # FreeType is not included in Ubuntu. Let's fix that.
-      - name: Install FreeType
-        if: ${{matrix.os.fullname == 'ubuntu-latest'}}
-        run: |
-         sudo apt-get update && \
-         sudo apt-get install -y libfreetype6-dev
-      - name: Compile
-        run: dotnet build -c Debug -warnaserror
-
       - name: Test
-        run: dotnet test $pwd/Tests/*.Tests/bin/Debug/*/*.Tests.dll --logger "trx;LogFileName=TestResults-${{matrix.os.prettyname}}.trx"
+        run: |
+          cp $pwd/Tests/Utapoi.FreeType.Tests/Fonts/ $pwd/Tests/Utapoi.FreeType.Tests/bin/Debug/net6.0/Fonts/
+          dotnet nuget add source --username Mikyan0207 --password ${{ secrets.NUGET_PACKAGE }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/Utapoi/index.json"
+          dotnet test $pwd/Tests/Utapoi.FreeType.Tests/bin/Debug/*/*.Tests.dll --logger "trx;LogFileName=TestResults-${{matrix.os.prettyname}}.trx"
         shell: pwsh
 
       # Attempt to upload results even if test fails.
