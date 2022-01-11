@@ -26,7 +26,6 @@ jobs:
       - name: Test
         run: |
           cp $pwd/Tests/Utapoi.FreeType.Tests/Fonts/ $pwd/Tests/Utapoi.FreeType.Tests/bin/Debug/net6.0/Fonts/
-          dotnet nuget add source --username Mikyan0207 --password ${{ secrets.NUGET_PACKAGE }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/Utapoi/index.json"
           dotnet test $pwd/Tests/Utapoi.FreeType.Tests/bin/Debug/*/*.Tests.dll --logger "trx;LogFileName=TestResults-${{matrix.os.prettyname}}.trx"
         shell: pwsh
 
@@ -62,7 +61,9 @@ jobs:
         run: dotnet tool restore
 
       - name: Restore Packages
-        run: dotnet restore
+        run: |
+          dotnet nuget add source --username Mikyan0207 --password ${{ secrets.NUGET_PACKAGE }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/Utapoi/index.json"
+          dotnet restore
 
       - name: CodeFileSanity
         run: |
