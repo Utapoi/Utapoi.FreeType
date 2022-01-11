@@ -22,4 +22,13 @@
     <ProjectReference Include="..\..\Utapoi.FreeType\Utapoi.FreeType.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Fonts\OpenSans-Bold.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Fonts\Roboto-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
