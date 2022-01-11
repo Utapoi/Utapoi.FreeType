@@ -23,6 +23,9 @@ jobs:
         with:
           dotnet-version: "6.0.x"
 
+      - name: Compile
+        run: dotnet build -c Debug -warnaserror 
+
       - name: Test
         run: dotnet test $pwd/Tests/*.Tests/bin/Debug/*/*.Tests.dll --logger "trx;LogFileName=TestResults-${{matrix.os.prettyname}}.trx"
         shell: pwsh
