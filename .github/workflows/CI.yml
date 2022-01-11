@@ -25,7 +25,7 @@ jobs:
 
       - name: Test
         run: |
-          cp $pwd/Tests/Utapoi.FreeType.Tests/Fonts/ $pwd/Tests/Utapoi.FreeType.Tests/bin/Debug/net6.0/Fonts/
+          cp -r $pwd/Tests/Utapoi.FreeType.Tests/Fonts/ $pwd/Tests/Utapoi.FreeType.Tests/bin/Debug/net6.0/Fonts/
           dotnet test $pwd/Tests/Utapoi.FreeType.Tests/bin/Debug/*/*.Tests.dll --logger "trx;LogFileName=TestResults-${{matrix.os.prettyname}}.trx"
         shell: pwsh
 
