@@ -50,7 +50,7 @@ public class GlyphTests
         Assert.AreEqual(c, glyph?.GlyphCode);
         Assert.IsNotNull(glyph?.Bitmap);
         Assert.IsNotNull(glyph?.Bitmap.RawBuffer);
-        Assert.GreaterOrEqual(1, glyph?.Bitmap.Buffer.Length);
+        Assert.GreaterOrEqual(glyph?.Bitmap.Buffer.Length, 1);
     }
 
     [Test]
