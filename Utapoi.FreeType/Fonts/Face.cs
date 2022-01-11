@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Utapoi Ltd <contact@utapoi.com>
 
 using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
 using Utapoi.FreeType.Enums;
 using Utapoi.FreeType.Exceptions;
 using Utapoi.FreeType.Internal;
@@ -128,10 +127,10 @@ public sealed class Face : IDisposable
     {
         get
         {
-             if (IsDisposed)
+            if (IsDisposed)
                 throw new ObjectDisposedException(nameof(FontSize), "Cannot access a disposed object.");
 
-             return (Size.Ascender - Size.Descender);
+            return (Size.Ascender - Size.Descender);
         }
     }
 
