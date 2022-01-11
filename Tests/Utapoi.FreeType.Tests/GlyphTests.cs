@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Utapoi Ltd <contact@utapoi.com>
 
+using System;
 using NUnit.Framework;
 using Utapoi.FreeType.Enums;
 
@@ -50,7 +51,12 @@ public class GlyphTests
         Assert.AreEqual(c, glyph?.GlyphCode);
         Assert.IsNotNull(glyph?.Bitmap);
         Assert.IsNotNull(glyph?.Bitmap.RawBuffer);
-        Assert.GreaterOrEqual(glyph?.Bitmap.Buffer.Length, 1);
+
+        // Comparison order is different between Unix/OSX and Windows???
+        if (OperatingSystem.IsWindows())
+            Assert.GreaterOrEqual(1, glyph?.Bitmap.Buffer.Length);
+        else
+            Assert.GreaterOrEqual(glyph?.Bitmap.Buffer.Length, 1);
     }
 
     [Test]
