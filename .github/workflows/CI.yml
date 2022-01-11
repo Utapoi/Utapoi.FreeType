@@ -24,9 +24,7 @@ jobs:
           dotnet-version: "6.0.x"
 
       - name: Test
-        run: |
-          cp $pwd/Tests/Utapoi.FreeType.Tests/Fonts/ $pwd/Tests/Utapoi.FreeType.Tests/bin/Debug/net6.0/Fonts/
-          dotnet test $pwd/Tests/Utapoi.FreeType.Tests/bin/Debug/*/*.Tests.dll --logger "trx;LogFileName=TestResults-${{matrix.os.prettyname}}.trx"
+        run: dotnet test $pwd/Tests/Utapoi.FreeType.Tests/bin/Debug/*/*.Tests.dll --logger "trx;LogFileName=TestResults-${{matrix.os.prettyname}}.trx"
         shell: pwsh
 
       # Attempt to upload results even if test fails.
