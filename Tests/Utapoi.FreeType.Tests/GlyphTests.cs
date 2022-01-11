@@ -23,11 +23,11 @@ public class GlyphTests
     [TestCase("Fonts/Roboto-Regular.ttf", '3')]
     public void LoadGlyphFromChar(string font, char c)
     {
-        using var face = _freeType?.LoadFace(font);
+        var face = _freeType?.LoadFace(font);
 
         Assert.IsNotNull(face);
 
-        using var glyph = face?.LoadGlyph(c);
+        var glyph = face?.LoadGlyph(c);
 
         Assert.IsNotNull(glyph);
         Assert.AreEqual(c, glyph?.GlyphCode);
@@ -40,11 +40,11 @@ public class GlyphTests
     [TestCase("Fonts/OpenSans-Bold.ttf", '3')]
     public void LoadGlyphWithBitmap(string font, char c)
     {
-        using var face = _freeType?.LoadFace(font);
+        var face = _freeType?.LoadFace(font);
 
         Assert.IsNotNull(face);
 
-        using var glyph = face?.LoadGlyph(c, LoadFlags.Render);
+        var glyph = face?.LoadGlyph(c, LoadFlags.Render);
 
         Assert.IsNotNull(glyph);
         Assert.AreEqual(c, glyph?.GlyphCode);
@@ -60,20 +60,13 @@ public class GlyphTests
     [TestCase("Fonts/Roboto-Regular.ttf", '3')]
     public void LoadCharacter(string font, char c)
     {
-        using var face = _freeType?.LoadFace(font);
+        var face = _freeType?.LoadFace(font);
 
         Assert.IsNotNull(face);
 
-        using var glyph = face?.LoadCharacter(c);
+        var glyph = face?.LoadCharacter(c);
 
         Assert.IsNotNull(glyph);
         Assert.AreEqual(c, glyph?.GlyphCode);
-    }
-
-    [Test]
-    [TestCase("Fonts/OpenSans-Bold.ttf", "HelloWorld")]
-    public void LoadCharacters(string font, string text)
-    {
-
     }
 }
