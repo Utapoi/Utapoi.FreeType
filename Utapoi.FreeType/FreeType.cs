@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Utapoi Ltd <contact@utapoi.com>
 
+using System.Runtime.InteropServices;
 using Utapoi.FreeType.Enums;
 using Utapoi.FreeType.Exceptions;
 using Utapoi.FreeType.Fonts;

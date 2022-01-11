@@ -17,4 +17,8 @@
     <Folder Include="Exceptions\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Utapoi.FreeType.Native" Version="2022.1101.0" />
+  </ItemGroup>
+
 </Project>

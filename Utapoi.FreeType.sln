@@ -14,7 +14,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A67F1C6D-DABF-4839-BC15-E8254F011197}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		nuget.config = nuget.config
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utapoi.FreeType.Native", "Utapoi.FreeType.Native\Utapoi.FreeType.Native.csproj", "{05368646-6332-4E0C-A32E-C8CE68BDF205}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +53,18 @@ Global
 		{6A62EE34-F10A-428A-B097-D026AAA66B44}.Release|x64.Build.0 = Release|Any CPU
 		{6A62EE34-F10A-428A-B097-D026AAA66B44}.Release|x86.ActiveCfg = Release|Any CPU
 		{6A62EE34-F10A-428A-B097-D026AAA66B44}.Release|x86.Build.0 = Release|Any CPU
+		{05368646-6332-4E0C-A32E-C8CE68BDF205}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05368646-6332-4E0C-A32E-C8CE68BDF205}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05368646-6332-4E0C-A32E-C8CE68BDF205}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{05368646-6332-4E0C-A32E-C8CE68BDF205}.Debug|x64.Build.0 = Debug|Any CPU
+		{05368646-6332-4E0C-A32E-C8CE68BDF205}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{05368646-6332-4E0C-A32E-C8CE68BDF205}.Debug|x86.Build.0 = Debug|Any CPU
+		{05368646-6332-4E0C-A32E-C8CE68BDF205}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05368646-6332-4E0C-A32E-C8CE68BDF205}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05368646-6332-4E0C-A32E-C8CE68BDF205}.Release|x64.ActiveCfg = Release|Any CPU
+		{05368646-6332-4E0C-A32E-C8CE68BDF205}.Release|x64.Build.0 = Release|Any CPU
+		{05368646-6332-4E0C-A32E-C8CE68BDF205}.Release|x86.ActiveCfg = Release|Any CPU
+		{05368646-6332-4E0C-A32E-C8CE68BDF205}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +72,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F1727322-5AAF-40ED-926C-E471728B3052} = {9E478FF9-7E1E-4A15-926C-EC99BA01A0D7}
 		{6A62EE34-F10A-428A-B097-D026AAA66B44} = {65F3FC86-1F61-4A0D-80FF-2916ADA2D469}
+		{05368646-6332-4E0C-A32E-C8CE68BDF205} = {9E478FF9-7E1E-4A15-926C-EC99BA01A0D7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D271E7DA-63BB-4676-9862-01F19836B3EA}

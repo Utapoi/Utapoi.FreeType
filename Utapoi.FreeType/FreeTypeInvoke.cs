@@ -5,7 +5,7 @@ using Utapoi.FreeType.Enums;
 
 namespace Utapoi.FreeType;
 
-internal sealed class FreeTypeInvoke
+internal static class FreeTypeInvoke
 {
     private const string free_type_dll = "freetype";
 
