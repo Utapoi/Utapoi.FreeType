@@ -1,0 +1,90 @@
+on: [push, pull_request]
+name: Continuous Integration
+
+jobs:
+  test:
+    name: Test
+    runs-on: ${{matrix.os.fullname}}
+    strategy:
+       fail-fast: false
+       matrix:
+          os:
+            - { prettyname: Windows, fullname: windows-latest }
+            - { prettyname: macOS, fullname: macos-latest }
+            - { prettyname: Linux, fullname: ubuntu-latest }
+        
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install .NET 6.0.x
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "6.0.x"
+
+      - name: Restore Packages
+        run: |
+          dotnet nuget add source --username Mikyan0207 --password ${{ secrets.NUGET_PACKAGE }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/Utapoi/index.json"
+          dotnet restore
+
+      - name: Compile
+        run: dotnet build -c Debug -warnaserror 
+
+      - name: Test
+        run: dotnet test $pwd/Tests/*.Tests/bin/Debug/*/*.Tests.dll --logger "trx;LogFileName=TestResults-${{matrix.os.prettyname}}.trx"
+        shell: pwsh
+
+      # Attempt to upload results even if test fails.
+      # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#always
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: utapoi-freetype-test-results-${{matrix.os.prettyname}}
+          path: ${{github.workspace}}/TestResults/TestResults-${{matrix.os.prettyname}}.trx
+
+  inspect-code:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # FIXME: Tools won't run in .NET 6.0 unless you install 3.1.x LTS side by side.
+      # https://itnext.io/how-to-support-multiple-net-sdks-in-github-actions-workflows-b988daa884e
+      - name: Install .NET 3.1.x LTS
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "3.1.x"
+
+      - name: Install .NET 6.0.x
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "6.0.x"
+
+      - name: Restore Tools
+        run: dotnet tool restore
+
+      - name: Restore Packages
+        run: |
+          dotnet nuget add source --username Mikyan0207 --password ${{ secrets.NUGET_PACKAGE }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/Utapoi/index.json"
+          dotnet restore
+
+      - name: CodeFileSanity
+        run: |
+          # TODO: Add ignore filters and GitHub Workflow Command Reporting in CFS. That way we don't have to do this workaround.
+          exit_code=0
+          while read -r line; do
+            if [[ ! -z "$line" ]]; then
+              echo "::error::$line"
+              exit_code=1
+            fi
+          done <<< $(dotnet codefilesanity)
+          exit $exit_code
+
+      - name: InspectCode
+        run: dotnet jb inspectcode $(pwd)/Utapoi.FreeType.sln --output=$(pwd)/inspectcodereport.xml --cachesDir=$(pwd)/inspectcode --verbosity=WARN
+
+      - name: NVika
+        run: dotnet nvika parsereport "${{github.workspace}}/inspectcodereport.xml"
