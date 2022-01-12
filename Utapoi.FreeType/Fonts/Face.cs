@@ -31,7 +31,7 @@ public sealed class Face : IDisposable
         InternalFontFace = Marshal.PtrToStructure<FTFace>(Handle);
 
         // Avoid InvalidSizeHandle error.
-        SetSize(1);
+        SetSize(15);
     }
 
     public Face(IntPtr library, string path) : this(library, path, 0)

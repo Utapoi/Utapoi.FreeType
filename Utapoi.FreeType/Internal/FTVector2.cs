@@ -7,7 +7,7 @@ namespace Utapoi.FreeType.Internal;
 [StructLayout(LayoutKind.Sequential)]
 internal struct FTVector2
 {
-    public long X { get; set; }
+    public CLong X { get; set; }
 
-    public long Y { get; set; }
+    public CLong Y { get; set; }
 }

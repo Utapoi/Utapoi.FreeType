@@ -7,19 +7,19 @@ namespace Utapoi.FreeType.Internal;
 [StructLayout(LayoutKind.Sequential)]
 internal struct FTGlyphMetrics
 {
-    public long Width { get; set; }
+    public CLong Width { get; set; }
 
-    public long Height { get; set; }
+    public CLong Height { get; set; }
 
-    public long HorizontalBearingX { get; set; }
+    public CLong HorizontalBearingX { get; set; }
 
-    public long HorizontalBearingY { get; set; }
+    public CLong HorizontalBearingY { get; set; }
 
-    public long HorizontalAdvance { get; set; }
+    public CLong HorizontalAdvance { get; set; }
 
-    public long VerticalBearingX { get; set; }
+    public CLong VerticalBearingX { get; set; }
 
-    public long VerticalBearingY { get; set; }
+    public CLong VerticalBearingY { get; set; }
 
-    public long VerticalAdvance { get; set; }
+    public CLong VerticalAdvance { get; set; }
 }

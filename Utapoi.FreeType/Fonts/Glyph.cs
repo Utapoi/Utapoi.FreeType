@@ -15,10 +15,9 @@ public class Glyph : IDisposable
 
     private bool IsDisposed { get; set; }
 
-    private FTGlyphSlot InternalSlot { get; }
-
     private FTGlyph InternalGlyph { get; }
 
+    private GlyphSlot GlyphSlot { get; }
 
     public Glyph(IntPtr glyphSlot, Face face, ulong glyphCode)
     {
@@ -30,7 +29,7 @@ public class Glyph : IDisposable
         GlyphCode = glyphCode;
         Handle = glyph;
         InternalGlyph = Marshal.PtrToStructure<FTGlyph>(glyph);
-        InternalSlot = Marshal.PtrToStructure<FTGlyphSlot>(glyphSlot);
+        GlyphSlot = new GlyphSlot(glyphSlot, face);
     }
 
     ~Glyph()
@@ -47,11 +46,36 @@ public class Glyph : IDisposable
             if (IsDisposed)
                 throw new ObjectDisposedException(nameof(Bitmap), "Cannot access a disposed object.");
 
-            return new Bitmap(InternalSlot.Bitmap, InternalSlot.BitmapLeft, InternalSlot.BitmapTop);
+            return GlyphSlot.Bitmap;
+        }
+    }
+
+    public long AdvanceX
+    {
+        get
+        {
+            if (IsDisposed)
+                throw new ObjectDisposedException(nameof(AdvanceX), "Cannot access a disposed object.");
+
+            return InternalGlyph.Advance.X.Value;
+        }
+    }
+
+    public long AdvanceY
+    {
+        get
+        {
+            if (IsDisposed)
+                throw new ObjectDisposedException(nameof(AdvanceX), "Cannot access a disposed object.");
+
+            return InternalGlyph.Advance.Y.Value;
         }
     }
 
     #endregion
+
+    public void Render(RenderMode renderMode)
+        => GlyphSlot.Render(renderMode);
 
     public void Dispose()
     {
@@ -60,11 +84,12 @@ public class Glyph : IDisposable
 
         ReleaseUnmanagedResources();
         GC.SuppressFinalize(this);
-        IsDisposed = true;
     }
 
     private void ReleaseUnmanagedResources()
     {
+        IsDisposed = true;
+
         if (Handle == IntPtr.Zero)
             return;
 

@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>2022.1101.0</Version>
+    <Version>2022.1201.0</Version>
     <Company>$(Authors)</Company>
     <Authors>Utapoi</Authors>
     <Description>FreeType bindings and library for .NET 6</Description>
@@ -27,6 +27,7 @@
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
+
   <ItemGroup>
     <None Include="..\LICENSE">
       <Pack>True</Pack>

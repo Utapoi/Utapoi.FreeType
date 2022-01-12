@@ -76,5 +76,8 @@ internal static class FreeTypeInvoke
     [DllImport(free_type_dll, EntryPoint = "FT_Get_Glyph", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
     internal static extern Error FT_Get_Glyph(IntPtr glyphSlot, out IntPtr glyph);
 
+    [DllImport(free_type_dll, EntryPoint = "FT_Render_Glyph", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
+    internal static extern Error FT_Render_Glyph(IntPtr glyph, int flags);
+
     #endregion
 }
